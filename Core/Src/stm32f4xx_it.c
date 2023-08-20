@@ -184,7 +184,14 @@ void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
 
-	Debounce(GPIOA, GPIO_PIN_0, 10);
+	//BUTTON 1 debounce control
+	Multiple_Debounce(GPIOA, GPIO_PIN_0, 1, 10);
+
+	//BUTTON 2 debounce control
+	Multiple_Debounce(GPIOA, GPIO_PIN_2, 2, 10);
+
+	//BUTTON 3 debounce control
+	Multiple_Debounce(GPIOB, GPIO_PIN_1, 3, 10);
 
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();

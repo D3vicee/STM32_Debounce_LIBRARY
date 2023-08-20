@@ -93,12 +93,29 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(but_state == 1){
-		   HAL_GPIO_WritePin( GPIOD,GPIO_PIN_15,GPIO_PIN_SET);
-		   count= but_count;
+	  //BUTTON 1 task
+	  if(BUTS_STATE[1] == 1){
+		   HAL_GPIO_WritePin( GPIOD,GPIO_PIN_14,GPIO_PIN_SET);
+		   count= BUTS_COUNT[1];
 	  }
-	  if(but_state == 0){
+	  if(BUTS_STATE[1] == 0){
+		   HAL_GPIO_WritePin( GPIOD,GPIO_PIN_14,GPIO_PIN_RESET);
+	  }
+	  //BUTTON 2 task
+	  if(BUTS_STATE[2] == 1){
+		   HAL_GPIO_WritePin( GPIOD,GPIO_PIN_15,GPIO_PIN_SET);
+		   count= BUTS_COUNT[2];
+	  }
+	  if(BUTS_STATE[2] == 0){
 		   HAL_GPIO_WritePin( GPIOD,GPIO_PIN_15,GPIO_PIN_RESET);
+	  }
+	  //BUTTON 3 task
+	  if(BUTS_STATE[3] == 1){
+		   HAL_GPIO_WritePin( GPIOD,GPIO_PIN_12,GPIO_PIN_SET);
+		   count= BUTS_COUNT[3];
+	  }
+	  if(BUTS_STATE[3] == 0){
+		   HAL_GPIO_WritePin( GPIOD,GPIO_PIN_12,GPIO_PIN_RESET);
 	  }
     /* USER CODE END WHILE */
 
@@ -164,25 +181,26 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : PA0 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  /*Configure GPIO pins : PA0 PA2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_2;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PD10 */
-  GPIO_InitStruct.Pin = GPIO_PIN_10;
+  /*Configure GPIO pin : PB1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PD14 PD15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_14|GPIO_PIN_15;
+  /*Configure GPIO pins : PD12 PD14 PD15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_14|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

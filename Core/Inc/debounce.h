@@ -8,7 +8,9 @@
 #ifndef INC_DEBOUNCE_H_
 #define INC_DEBOUNCE_H_
 #endif /* INC_DEBOUNCE_H_ */
-
+#ifndef NUMBEROFBUTTONS
+#define NUMBEROFBUTTONS
+#endif
 /*
  * BU DOSYA ANA PROGRAMIN İÇERİSİNE DAHİL EDİLMELİDİR. ARDINDAN VARIABLES KISMINDAKİ DEĞİŞKENLER ANA PROGRAMDA SORGULANARAK BUTON DURUMU ELDE EDİLMELİDİR.
  * THIS FILE MUST BE INCLUDED IN THE MAIN PROGRAM. THEN THE BUTTON STATUS MUST BE OBTAINED BY QUERYING THE VARIABLES IN THE VARIABLES SECTION IN THE MAIN PROGRAM.
@@ -27,7 +29,11 @@
  * 				BUT_debounce_time	: Debounce işlemi için kullanılacak olan gecikme. Sisteme göre denenerek bulunabilir (Recommend equals 5 or more than).
  */
 
-
-extern uint16_t but_state, but_count;
+extern uint16_t BUTS_STATE[NUMBEROFBUTTONS], BUTS_COUNT[NUMBEROFBUTTONS];
+extern uint16_t BUT_STATE, BUT_COUNT;
 
 void Debounce(GPIO_TypeDef* BUT_GPIOx, uint16_t BUT_GPIO_Pin, uint8_t BUT_debounce_time );
+void Multiple_Debounce(GPIO_TypeDef* BUT_GPIOx, uint16_t BUT_GPIO_Pin, uint16_t BUT_index, uint8_t BUT_debounce_time );
+
+
+

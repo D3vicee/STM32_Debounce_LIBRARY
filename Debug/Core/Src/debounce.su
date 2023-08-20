@@ -1,1 +1,2 @@
-../Core/Src/debounce.c:11:6:Debounce	16	static
+../Core/Src/debounce.c:14:6:Debounce	16	static
+../Core/Src/debounce.c:29:6:Multiple_Debounce	24	static
